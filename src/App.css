@@ -1,0 +1,113 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.Field {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: center;
+  border: 8px solid #222222;
+  border-radius: 10px;
+  background-color: rgb(23, 78, 80);
+  padding: 4px;
+  /* Borders 
+  border-width:1px;
+  border-style:solid;
+  border-left-color:#777;
+  border-right-color:#777;
+  border-top-color:#999;
+  border-bottom:4px solid #555; */  
+}
+
+.Line {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: center;    
+}
+
+.Cell {
+  border: 1px solid gray;
+  padding: 2px;  
+  width: 100px;
+  height: 100px;
+  font-size: xx-large;
+  text-align: center;
+  background-color:cadetblue;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(164, 211, 212)), to(cadetblue), color-stop(1,cadetblue));
+  text-shadow:0px -1px 1px rgba(255,255,255,0.5);
+  display: flex;
+}
+.Cell span {
+  width: 100px;
+  margin: auto;  
+}
+
+.Cell.Empty {
+  background: none;
+  border: 0px; 
+}
+
+.NewGameButton {
+  cursor: default;
+  background-color:cadetblue;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 4px; 
+  background: -webkit-gradient(linear, 0 0, 0 100%, from(rgb(164, 211, 212)), to(rgb(164, 211, 212)), color-stop(0.5,cadetblue));
+  text-shadow:0px -1px 1px rgba(255,255,255,0.5); 
+  /* Borders*/ 
+  border-width:1px;
+  border-style:solid;
+  border-left-color:#777;
+  border-right-color:#777;
+  border-top-color:#999;
+  border-bottom:2px solid #555;       
+}
+.panelButton {
+  position: relative;
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.ConnectedField {
+  position: relative;
+  float: left;
+}
+.panelGame {
+  margin: 50px; 
+  position: relative;
+  float: left; 
+}
