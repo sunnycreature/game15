@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 
-export class NewGameButton extends Component {
+export class GameButton extends Component {
     render () {    
-      const { onNewGame } = this.props;
+      const { onClick, caption, visible } = this.props;
 
       return(    
-        <span className="NewGameButton" onClick={onNewGame}>
-          New Game
+        <span className={visible ? "NewGameButton" : "display_none"} onClick={onClick}>
+          {caption}
         </span>
       );      
     }
