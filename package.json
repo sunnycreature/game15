@@ -2,6 +2,7 @@
   "name": "game15",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://gsbelarus.com/gs/game15",
   "dependencies": {
     "classnames": "^2.2.5",
     "react": "^16.2.0",
