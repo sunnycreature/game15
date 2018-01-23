@@ -42,7 +42,7 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
   var newMoves = moves;
 
   if (action.type === 'CELL_CLICK' && stage === INPROGRESS) {
-    const { field, moves } = state;
+    const { field } = state;
     const { x, y } = action;
     const h = field.length;
     const w = field[0].length;
