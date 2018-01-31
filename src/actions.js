@@ -15,6 +15,13 @@ export function CellClick(x, y) {
   }
 }
 
+export function ChangeOpt (optvalue) {
+  return {
+    type: 'CHANGE_OPTIONS',
+    optvalue
+  }
+}
+
 export function StartGame(dispatch, timerID) {
   if (timerID) clearInterval(timerID);
   return {

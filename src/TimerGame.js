@@ -19,7 +19,7 @@ export class TimerGame extends Component {
     return (
       <div className = {classNames('TimerGame', {NoneDisplay: !visible})}>
         <div>Таймер:   {hours_str}:{minutes_str}:{sec_num_str}</div>
-        <div>Сделано шагов: {moves}</div>
+        <div>Сделано шагов: {moves}</div>        
       </div>  
     )
   }  

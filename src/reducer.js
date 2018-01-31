@@ -26,12 +26,13 @@ const getInitialState = (w, h) => {
 
   return(
     {
-      field, //[[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]], 
+      field: [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]], 
       timerID: 0,
       elapsed: 0,
       moves: 0,
       stage: READY,
-      stateCell: 1
+      selectedOption: 'numbers',
+      fileImgName: '../img/img2.png'
     }
   );    
 };
@@ -46,6 +47,7 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     const { x, y } = action;
     const h = field.length;
     const w = field[0].length;
+    
     newMoves = newMoves + 1;
 
     const newField = [];
@@ -84,10 +86,12 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     return {...state, field: newField, stage: endGame ? COMPLETED : stage, moves: newMoves}          
   } else if (action.type === 'START_GAME') {
     const { timerID } = action;
+    
     if (stage === READY) {
-      return {...state, timerID, elapsed: 1, stage: INPROGRESS, moves: 0 }
-    } else {
-      const newState = getInitialState(4, 4);
+      return {...state, timerID, elapsed: 1, stage: INPROGRESS, moves: 0}
+    } else {      
+      const newState = getInitialState(4, 4);  
+      //const { optvalue } = action;    
       return {...newState, timerID, elapsed: 1, stage: INPROGRESS }
     }  
   } else if (action.type === 'GAME_PAUSE') {
@@ -98,7 +102,9 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     return getInitialState(4, 4);
   } else if (action.type === 'TIME_TICK' && stage === INPROGRESS) {
     return {...state, elapsed: state.elapsed + 1000, moves: newMoves }
-   
+  } else if (action.type === 'CHANGE_OPTIONS' && (stage === READY || stage === COMPLETED)) {
+    const { optvalue } = action;
+    return {...state, selectedOption: optvalue}    
   } else {    
     return state;
   }  

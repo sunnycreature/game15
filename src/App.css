@@ -38,6 +38,7 @@
   border-radius: 10px;
   background-color: rgb(23, 78, 80);
   padding: 4px;
+ 
   /* Borders 
   border-width:1px;
   border-style:solid;
@@ -87,6 +88,9 @@
   color:rgb(35, 118, 121);
   background: -webkit-gradient(linear, 0 0, 0 100%, from(cadetblue), to(rgb(35, 118, 121)), color-stop(1,rgb(35, 118, 121)));
 }
+.Cell.Empty.Paused {
+  background: none;
+}
 
 .NewGameButton {
   cursor: default;
@@ -127,7 +131,7 @@
 }
 .panelTimer {
   position: absolute;
-  top: 100px;
+  top: 240px;
   text-align: left;
   width: 200px;  
 }
@@ -137,11 +141,85 @@
 } 
 .panelBtn {
   float: left;
-  position: relative;
+  position: absolute;
   margin-bottom: 10px;
   width: 100px;
+  top: 160px;
 }
 
 .display_none {
   display: none;
+  }
+.panelOptions {
+  text-align: left;
+  margin-bottom: 20px;
+  float: left;
+  width: 100%;
+}
+.radio {
+  margin-top: 4px;
+  padding-left: 6px;
+}
+.Cell1 span{
+  border-bottom: 60px solid red;
+	border-left: 14px solid transparent;
+	border-right: 14px solid transparent;
+	height: 0;
+	width: 60px;
+}
+.Cell2 span{
+	width: 80px;
+	height: 80px;
+	background: yellow;
+	-moz-border-radius: 40px;
+	-webkit-border-radius: 40px;
+	border-radius: 40px;
+}
+.Cell3 span{
+	width: 80px;
+	height: 80px;
+	background: green;
+}
+.Cell4 span{
+	width: 0;
+	height: 0;
+	border-left: 40px solid transparent;
+	border-right: 40px solid transparent;
+	border-bottom: 80px solid blue;
+}
+.Cell1.Paused span{
+  border-bottom-color: rgb(35, 118, 121);
+}
+.Cell2.Paused span{
+	background: rgb(35, 118, 121);
+}
+.Cell3.Paused span{
+	background:rgb(35, 118, 121);
+}
+.Cell4.Paused span{
+	border-bottom-color: rgb(35, 118, 121);
+}
+.Cell.Empty span{
+  background: none;
+  border: 1px; 
+  border-style:solid;
+  border-color: transparent;
+  color: rgb(23, 78, 80);
+  text-shadow: 0 0 0;
+  
+}
+.CellP {
+  background-image: url("./img/img2.png");
+}
+.optionWH input {
+  width: 24px;
+  float: right;
+  margin-left: 4px;
+}
+.InputComponent {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.InputComponent span {
+  
 }
