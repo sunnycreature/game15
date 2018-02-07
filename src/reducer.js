@@ -4,7 +4,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const getInitialState = (w, h) => {
+const getInitialState = (w, h, selectedOption = 'numbers') => {
   const pool = [];
   for (let i = 0; i < w * h; i++) {
     pool[i] = i;
@@ -26,15 +26,15 @@ const getInitialState = (w, h) => {
 
   return(
     {
-      field, //: [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]], 
+      field: [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]], 
       timerID: 0,
       elapsed: 0,
       moves: 0,
       stage: READY,
-      selectedOption: 'numbers',
+      selectedOption,
       fileImgName: '../img/img2.png', 
-      paramWidth: 4,
-      paramHeight: 4
+      paramWidth: w,
+      paramHeight: h
     }
   );    
 };
@@ -92,7 +92,7 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     if (stage === READY) {
       return {...state, timerID, elapsed: 1, stage: INPROGRESS, moves: 0}
     } else {      
-      const newState = getInitialState(4, 4);  
+      const newState = getInitialState(4, 4, state.selectedOption);  
       //const { optvalue } = action;    
       return {...newState, timerID, elapsed: 1, stage: INPROGRESS }
     }  
@@ -101,7 +101,8 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
   } else if (action.type === 'GAME_RESUME') {
     return {...state, stage: INPROGRESS }
   } else if (action.type === 'STOP_GAME') {
-    return getInitialState(4, 4);
+    const { selectedOption } = state;
+    return getInitialState(4, 4, selectedOption);
   } else if (action.type === 'TIME_TICK' && stage === INPROGRESS) {
     return {...state, elapsed: state.elapsed + 1000, moves: newMoves }
   } else if (action.type === 'CHANGE_OPTIONS' && (stage === READY || stage === COMPLETED)) {
