@@ -22,17 +22,10 @@ export function ChangeOpt (optvalue) {
   }
 }
 
-export function ChangeInput (paramW) {
+export function ChangeInput (what, value) {
   return {
-    type: 'CHANGE_OPTIONS_W',
-    paramW
-  }
-}
-
-export function ChangeOptH (paramH) {
-  return {
-    type: 'CHANGE_OPTIONS_H',
-    paramH
+    type: what === 'width' ? 'CHANGE_OPTIONS_W' : 'CHANGE_OPTIONS_H',
+    value
   }
 }
 

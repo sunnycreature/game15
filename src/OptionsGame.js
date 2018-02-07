@@ -3,12 +3,12 @@ import './App.css';
 import {InputComponent} from './InputComponent'
 
 export class OptionsGame extends Component {
-    render () {    
-      const { selectedOption, visible, onChangeOpt, paramWidth, paramHeight, onChangeInput} = this.props;
-     
-      return(  
+    render () {
+      const { selectedOption, visible, onChangeOpt, paramWidth, paramHeight, onChangeInputW, onChangeInputH} = this.props;
+
+      return(
         <div className={visible ? "panelOptions" : "display_none"}>
-          <span>Вид игры:</span>  
+          <span>Вид игры:</span>
           <div className="radio">
             <label>
               <input type="radio" value="1" checked={selectedOption === 'numbers'} onChange={ () => onChangeOpt("numbers") }/>
@@ -25,14 +25,14 @@ export class OptionsGame extends Component {
             <label>
               <input type="radio" value="3" checked={selectedOption === 'puzzle'} onChange={ () => onChangeOpt("puzzle") }/>
               пазл
-            </label>            
+            </label>
           </div>
           <div className="optionWH">
-            <InputComponent AttrName="Ширина:" paramValue={paramWidth} onChangeInput={onChangeInput}/> 
-            <InputComponent AttrName="Высота:" paramValue={paramHeight} onChangeInput={onChangeInput}/>
+            <InputComponent AttrName="Ширина:" paramValue={paramWidth} onChangeInput={onChangeInputW}/>
+            <InputComponent AttrName="Высота:" paramValue={paramHeight} onChangeInput={onChangeInputH}/>
           </div>
-        </div>  
-      );      
+        </div>
+      );
     }
 }
 

@@ -14,7 +14,7 @@ const ConnectedField = connect(
     {
       fld: state.gameReducer.field,
       stage: state.gameReducer.stage,
-      onGetCellClass: state.gameReducer.selectedOption === 'numbers' ? (v) => '' : 
+      onGetCellClass: state.gameReducer.selectedOption === 'numbers' ? (v) => '' :
         state.gameReducer.selectedOption === 'figures' ?
         (v) => {
           if (v >= 1 && v <= 4) return 'Cell1'
@@ -22,18 +22,18 @@ const ConnectedField = connect(
           else if (v >= 9 && v <= 12) return 'Cell3'
           else return 'Cell4';
         } :
-        (v) => {   
-             return 'CellP';
+        (v) => {
+             return state.gameReducer.paramHeight === 4 ? 'CellP' : 'CellP2';
         },
-      fileImgName: state.gameReducer.fileImgName     
+      fileImgName: state.gameReducer.fileImgName
     }
   ),
   (dispatch) => (
     {
       onCellClick: (x, y) => dispatch(CellClick(x, y))
     }
-  )  
-)(Field);  
+  )
+)(Field);
 
 const ConnectedOptionsGame = connect(
   (state) => (
@@ -41,13 +41,14 @@ const ConnectedOptionsGame = connect(
       selectedOption: state.gameReducer.selectedOption,
       visible: state.gameReducer.stage === READY || state.gameReducer.stage === COMPLETED,
       paramWidth: state.gameReducer.paramWidth,
-      paramHeight: state.gameReducer.paramHeight       
+      paramHeight: state.gameReducer.paramHeight
     }
   ),
  (dispatch) => (
     {
       onChangeOpt: (optvalue) => dispatch(ChangeOpt(optvalue)),
-      onChangeInput: (paramW) => dispatch(ChangeInput(paramW)) 
+      onChangeInputW: (w) => dispatch(ChangeInput('width', w)),
+      onChangeInputH: (h) => dispatch(ChangeInput('height', h))
     }
   )
 )(OptionsGame);
@@ -59,7 +60,7 @@ const StartStopButton = connect(
     {
       caption: state.gameReducer.stage === READY || state.gameReducer.stage === COMPLETED ? 'Start' : 'Stop',
       timerID: state.gameReducer.timerID,
-      visible: true    
+      visible: true
     }
   ),
   (dispatch) => (
@@ -74,16 +75,16 @@ const StartStopButton = connect(
       ...propsFromState,
       ...propsFromDispatch,
       onClick: caption === 'Start' ? () => dispatch(StartGame(dispatch, timerID)) : () => dispatch(StopGame(timerID)) }
-  }  
-)(GameButton); 
+  }
+)(GameButton);
 
 const PauseResumeButton = connect(
   (state) => (
     {
       caption: state.gameReducer.stage === INPROGRESS ? 'Pause' : 'Resume',
       timerID: state.gameReducer.timerID,
-      visible: state.gameReducer.stage === INPROGRESS || state.gameReducer.stage === PAUSED ? true : false 
-    
+      visible: state.gameReducer.stage === INPROGRESS || state.gameReducer.stage === PAUSED ? true : false
+
     }
   ),
   (dispatch) => (
@@ -100,8 +101,8 @@ const PauseResumeButton = connect(
       onClick: caption === 'Pause' ? () => dispatch(PauseGame(dispatch)) :
         () => dispatch(ResumeGame(timerID))
     }
-  }  
-)(GameButton); 
+  }
+)(GameButton);
 
 const ConnectedTimer = connect(
   (state) => (
@@ -123,24 +124,24 @@ class App extends Component {
             <h1 className="App-title">Game15</h1>
           </header>
           <div className="panelGame">
-           
-            <div className="ConnectedField"> 
+
+            <div className="ConnectedField">
               <ConnectedField />
-            </div>  
+            </div>
             <div className="panelInfo">
               <ConnectedOptionsGame/>
               <div className="panelBtn">
                 <StartStopButton/>
-                <PauseResumeButton/>                
+                <PauseResumeButton/>
               </div>
               <div className="panelTimer">
                 <ConnectedTimer />
-              </div>              
-            </div>             
-          </div>  
-          
+              </div>
+            </div>
+          </div>
+
         </div>
-      </Provider>  
+      </Provider>
     );
   }
 }
