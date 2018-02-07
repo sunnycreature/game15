@@ -22,6 +22,20 @@ export function ChangeOpt (optvalue) {
   }
 }
 
+export function ChangeInput (paramW) {
+  return {
+    type: 'CHANGE_OPTIONS_W',
+    paramW
+  }
+}
+
+export function ChangeOptH (paramH) {
+  return {
+    type: 'CHANGE_OPTIONS_H',
+    paramH
+  }
+}
+
 export function StartGame(dispatch, timerID) {
   if (timerID) clearInterval(timerID);
   return {

@@ -6,7 +6,7 @@ import { store } from './store';
 import { GameButton } from './NewGameButton'
 import { OptionsGame } from './OptionsGame'
 import { TimerGame } from './TimerGame'
-import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt } from './actions'
+import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeInput } from './actions'
 import { READY, INPROGRESS, PAUSED, COMPLETED } from './const.js'
 
 const ConnectedField = connect(
@@ -32,30 +32,34 @@ const ConnectedField = connect(
     {
       onCellClick: (x, y) => dispatch(CellClick(x, y))
     }
-  )
-  
+  )  
 )(Field);  
 
 const ConnectedOptionsGame = connect(
   (state) => (
     {
       selectedOption: state.gameReducer.selectedOption,
-      visible: state.gameReducer.stage === READY || state.gameReducer.stage === COMPLETED
+      visible: state.gameReducer.stage === READY || state.gameReducer.stage === COMPLETED,
+      paramWidth: state.gameReducer.paramWidth,
+      paramHeight: state.gameReducer.paramHeight       
     }
   ),
-  (dispatch) => (
+ (dispatch) => (
     {
-      onChangeOpt: (optvalue) => dispatch(ChangeOpt(optvalue)) 
+      onChangeOpt: (optvalue) => dispatch(ChangeOpt(optvalue)),
+      onChangeInput: (paramW) => dispatch(ChangeInput(paramW)) 
     }
   )
 )(OptionsGame);
+
+
 
 const StartStopButton = connect(
   (state) => (
     {
       caption: state.gameReducer.stage === READY || state.gameReducer.stage === COMPLETED ? 'Start' : 'Stop',
       timerID: state.gameReducer.timerID,
-      visible: true     
+      visible: true    
     }
   ),
   (dispatch) => (

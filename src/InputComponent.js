@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 
 export class InputComponent extends Component {
+  
   render() {
-    const { AttrName } = this.props;
+    const { AttrName, paramValue, onChangeInput} = this.props;
     return (      
       <div className="InputComponent">
         <span>
           {AttrName}
         </span> 
-        <input type="text" onchange=""/>
+        <input type="text" defaultValue={paramValue} onchange={() => onChangeInput(this.target.value)}/>
       </div>
     )
   }

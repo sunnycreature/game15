@@ -26,13 +26,15 @@ const getInitialState = (w, h) => {
 
   return(
     {
-      field: [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]], 
+      field, //: [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]], 
       timerID: 0,
       elapsed: 0,
       moves: 0,
       stage: READY,
       selectedOption: 'numbers',
-      fileImgName: '../img/img2.png'
+      fileImgName: '../img/img2.png', 
+      paramWidth: 4,
+      paramHeight: 4
     }
   );    
 };
@@ -104,7 +106,13 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     return {...state, elapsed: state.elapsed + 1000, moves: newMoves }
   } else if (action.type === 'CHANGE_OPTIONS' && (stage === READY || stage === COMPLETED)) {
     const { optvalue } = action;
-    return {...state, selectedOption: optvalue}    
+    return {...state, selectedOption: optvalue}   
+  } else if (action.type === 'CHANGE_OPTIONS_W' && (stage === READY || stage === COMPLETED)) {
+    const { paramW } = action;
+    return {...state, paramWidth: paramW} 
+  } else if (action.type === 'CHANGE_OPTIONS_H' && (stage === READY || stage === COMPLETED)) {
+    const { paramH } = action;
+    return {...state, paramHeight: paramH}             
   } else {    
     return state;
   }  

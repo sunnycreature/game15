@@ -4,7 +4,7 @@ import {InputComponent} from './InputComponent'
 
 export class OptionsGame extends Component {
     render () {    
-      const { selectedOption, visible, onChangeOpt } = this.props;
+      const { selectedOption, visible, onChangeOpt, paramWidth, paramHeight, onChangeInput} = this.props;
      
       return(  
         <div className={visible ? "panelOptions" : "display_none"}>
@@ -28,11 +28,12 @@ export class OptionsGame extends Component {
             </label>            
           </div>
           <div className="optionWH">
-            <InputComponent AttrName="Ширина:"/> 
-            <InputComponent AttrName="Высота:"/> 
+            <InputComponent AttrName="Ширина:" paramValue={paramWidth} onChangeInput={onChangeInput}/> 
+            <InputComponent AttrName="Высота:" paramValue={paramHeight} onChangeInput={onChangeInput}/>
           </div>
         </div>  
       );      
     }
 }
 
+/*<InputComponent AttrName="Высота:" paramValue={paramHeight} onChangeInput={onChangeInput}/> */
