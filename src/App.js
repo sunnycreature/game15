@@ -40,8 +40,8 @@ const ConnectedOptionsGame = connect(
     {
       selectedOption: state.gameReducer.selectedOption,
       visible: state.gameReducer.stage === READY || state.gameReducer.stage === COMPLETED,
-      paramWidth: state.gameReducer.paramWidth,
-      paramHeight: state.gameReducer.paramHeight
+      paramWidth: state.gameReducer.field[0].length,
+      paramHeight: state.gameReducer.field.length
     }
   ),
  (dispatch) => (

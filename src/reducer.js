@@ -4,7 +4,7 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const getInitialState = (w, h, selectedOption = 'numbers') => {
+const prepareField = (w, h) => {
   const pool = [];
   for (let i = 0; i < w * h; i++) {
     pool[i] = i;
@@ -24,17 +24,19 @@ const getInitialState = (w, h, selectedOption = 'numbers') => {
     }
   }
 
+  return field;
+} 
+
+const getInitialState = (w, h, selectedOption = 'numbers') => {
   return(
     {
-      field: [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]],
+      field: prepareField(w, h), // : [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,0,15]],
       timerID: 0,
       elapsed: 0,
       moves: 0,
       stage: READY,
       selectedOption,
-      fileImgName: '../img/img2.png',
-      paramWidth: w,
-      paramHeight: h
+      fileImgName: '../img/img2.png'
     }
   );
 };
@@ -110,10 +112,12 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     return {...state, selectedOption: optvalue}
   } else if (action.type === 'CHANGE_OPTIONS_W' && (stage === READY || stage === COMPLETED)) {
     const { value } = action;
-    return {...state, paramWidth: value}
+    const { field } = state;
+    return {...state, field: prepareField(value, field.length)}
   } else if (action.type === 'CHANGE_OPTIONS_H' && (stage === READY || stage === COMPLETED)) {
     const { value } = action;
-    return {...state, paramHeight: value}
+    const { field } = state;
+    return {...state, field: prepareField(field[0].length, value)}
   } else {
     return state;
   }
