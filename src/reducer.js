@@ -36,7 +36,9 @@ const getInitialState = (w, h, selectedOption = 'numbers') => {
       moves: 0,
       stage: READY,
       selectedOption,
-      fileImgName: '../img/img2.png'
+      selectedSize,
+      fileImgName: '../img/img2.png',
+      widthCell: 104
     }
   );
 };
@@ -45,12 +47,12 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
 
   const { stage, moves } = state;
   var newMoves = moves;
+  const { field } = state;
+  const h = field.length;
+  const w = field[0].length;
 
   if (action.type === 'CELL_CLICK' && stage === INPROGRESS) {
-    const { field } = state;
     const { x, y } = action;
-    const h = field.length;
-    const w = field[0].length;
 
     newMoves = newMoves + 1;
 
@@ -94,7 +96,7 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     if (stage === READY) {
       return {...state, timerID, elapsed: 1, stage: INPROGRESS, moves: 0}
     } else {
-      const newState = getInitialState(4, 4, state.selectedOption);
+      const newState = getInitialState(w, h, state.selectedOption);
       //const { optvalue } = action;
       return {...newState, timerID, elapsed: 1, stage: INPROGRESS }
     }
@@ -104,12 +106,16 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     return {...state, stage: INPROGRESS }
   } else if (action.type === 'STOP_GAME') {
     const { selectedOption } = state;
-    return getInitialState(4, 4, selectedOption);
+    return getInitialState(w, h, selectedOption);
   } else if (action.type === 'TIME_TICK' && stage === INPROGRESS) {
     return {...state, elapsed: state.elapsed + 1000, moves: newMoves }
   } else if (action.type === 'CHANGE_OPTIONS' && (stage === READY || stage === COMPLETED)) {
     const { optvalue } = action;
     return {...state, selectedOption: optvalue}
+  } else if (action.type === 'CHANGE_OPTIONS_SIZE' && (stage === READY || stage === COMPLETED)) {
+    const { sizevalue } = action;
+    const
+    return {...state, field: prepareField(value, field.length)}    
   } else if (action.type === 'CHANGE_OPTIONS_W' && (stage === READY || stage === COMPLETED)) {
     const { value } = action;
     const { field } = state;

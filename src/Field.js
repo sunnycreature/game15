@@ -6,20 +6,26 @@ import { READY, PAUSED } from './const';
 export class Field extends Component {
 
   render() {
-    const { fld, onCellClick, stage, onGetCellClass, fileImgName } = this.props;
+    const { fld, onCellClick, stage, onGetCellClass, fileImgName, widthCell} = this.props;
     
     const ch = fld.length;
     const cw = fld[0].length;
     const lines = [];
+    //const wCol = 104;
 
     for (let i = 0; i < ch; i++)
       {
         const line = [];
         for (let j = 0; j < cw; j++)
         {
-          const classCell = onGetCellClass(fld[i][j]);
+          const classCell = onGetCellClass(fld[i][j], fld[0].length);
+          let h = fld[i][j]/cw; 
+          h = (h - h%1);       
+          let y = -h*widthCell;          
+          let x = -(fld[i][j] - h*ch)*widthCell;
           var CellStyle = {backgroundPosition: classCell === 'CellP' && !(!fld[i][j] || stage === READY) && !(stage === PAUSED) ? 
-          fld[i][j] === 1 ? `0px 0px` :
+          x + `px ` + y + `px` : `0px 0px`
+          /*fld[i][j] === 1 ? `0px 0px` :
           fld[i][j] === 2 ? `-104px 0px` : 
           fld[i][j] === 3 ? `-208px 0px` : 
           fld[i][j] === 4 ? `-312px 0px` : 
@@ -35,7 +41,7 @@ export class Field extends Component {
           fld[i][j] === 14 ? `-104px -312px` : 
           fld[i][j] === 15 ? `-208px -312px` : 
           fld[i][j] === 16 ? `-312px -312px` : `0px 0px`
-            : `0px 0px`/*,
+            : `0px 0px`*//*,
         backgroundImage: "url(" + {fileImgName}  + ")"*/};
           line.push(
             <div className={classNames('Cell ' + classCell, {Empty: !fld[i][j] || stage === READY, Paused: stage === PAUSED})} key={j} onClick={ () => onCellClick(j, i) }

@@ -187,19 +187,47 @@
 	border-right: 40px solid transparent;
 	border-bottom: 80px solid blue;
 }
-.Cell1.Paused span{
+.Cell5 span{
+  width: 80px;
+  height: 60px;
+  background: #8734f7;
+  -webkit-transform: skew(15deg);
+  -moz-transform: skew(15deg);
+  -o-transform: skew(15deg);
+  transform: skew(15deg);
+}
+.Cell6 span {
+    width: 0;
+    height: 0;
+    display: block;
+    position: absolute;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 70px solid #f597e1;
+    margin: 5px 0px 0px 15px;
+}
+.Cell6 span:after {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-top: 70px solid #f597e1;
+    margin: 22px 0 0 -35px;
+}
+.Cell1.Paused span, .Cell4.Paused span{
   border-bottom-color: rgb(35, 118, 121);
 }
-.Cell2.Paused span{
-	background: rgb(35, 118, 121);
-}
-.Cell3.Paused span{
+.Cell3.Paused span, .Cell5.Paused span, .Cell2.Paused span{
 	background:rgb(35, 118, 121);
 }
-.Cell4.Paused span{
-	border-bottom-color: rgb(35, 118, 121);
+.Cell6.Paused span, .Cell6.Paused span::after {
+  border-bottom-color: rgb(35, 118, 121);
+  border-top-color: rgb(35, 118, 121);
 }
-.Cell.Empty span{
+
+.Cell.Empty span, .Cell.Empty span::after{
   background: none;
   border: 1px;
   border-style:solid;
@@ -225,6 +253,16 @@
   margin-top: 10px;
   margin-right: 10px;
 }
-.InputComponent span {
-
+.optionType {
+  margin-bottom: 10px;
+}
+.optionSize span {
+  float: left;
+  width: 100%;
+}
+.optionSize select {
+  float: left;
+  margin-top: 6px;
+  margin-left: 12px;
+  padding-left: 4px;
 }

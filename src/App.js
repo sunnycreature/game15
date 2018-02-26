@@ -14,18 +14,22 @@ const ConnectedField = connect(
     {
       fld: state.gameReducer.field,
       stage: state.gameReducer.stage,
-      onGetCellClass: state.gameReducer.selectedOption === 'numbers' ? (v) => '' :
+      onGetCellClass: state.gameReducer.selectedOption === 'numbers' ? (v, w) => '' :
         state.gameReducer.selectedOption === 'figures' ?
-        (v) => {
-          if (v >= 1 && v <= 4) return 'Cell1'
+        (v, w) => {
+          const x = v/w; 
+          return 'Cell' + (x - x%1+ 1);           
+
+        /*  if (v >= 1 && v <= 4) return 'Cell1'
           else if (v >= 5 && v <= 8) return 'Cell2'
           else if (v >= 9 && v <= 12) return 'Cell3'
-          else return 'Cell4';
+          else return 'Cell4';*/
         } :
-        (v) => {
-             return state.gameReducer.paramHeight === 4 ? 'CellP' : 'CellP2';
+        (v, w) => {
+             return 'CellP';
         },
-      fileImgName: state.gameReducer.fileImgName
+      fileImgName: state.gameReducer.fileImgName,
+      widthCell: state.gameReducer.widthCell
     }
   ),
   (dispatch) => (
