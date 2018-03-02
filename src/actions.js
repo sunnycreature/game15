@@ -29,6 +29,13 @@ export function ChangeInput (what, value) {
   }
 }
 
+export function ChangeSize (sizevalue) {
+  return {
+    type: 'CHANGE_OPTIONS_SIZE',
+    sizevalue
+  }
+}
+
 export function StartGame(dispatch, timerID) {
   if (timerID) clearInterval(timerID);
   return {

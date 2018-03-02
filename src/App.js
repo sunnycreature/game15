@@ -6,7 +6,7 @@ import { store } from './store';
 import { GameButton } from './NewGameButton'
 import { OptionsGame } from './OptionsGame'
 import { TimerGame } from './TimerGame'
-import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeInput } from './actions'
+import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeInput, ChangeSize } from './actions'
 import { READY, INPROGRESS, PAUSED, COMPLETED } from './const.js'
 
 const ConnectedField = connect(
@@ -18,7 +18,8 @@ const ConnectedField = connect(
         state.gameReducer.selectedOption === 'figures' ?
         (v, w) => {
           const x = v/w; 
-          return 'Cell' + (x - x%1+ 1);           
+          return 'Cell' + (x - x%1 + (x%1 === 0 ? 0 : 1));           
+         // return 'Cell' + (v % w );           
 
         /*  if (v >= 1 && v <= 4) return 'Cell1'
           else if (v >= 5 && v <= 8) return 'Cell2'
@@ -26,7 +27,7 @@ const ConnectedField = connect(
           else return 'Cell4';*/
         } :
         (v, w) => {
-             return 'CellP';
+             return 'CellP' + w;
         },
       fileImgName: state.gameReducer.fileImgName,
       widthCell: state.gameReducer.widthCell
@@ -51,8 +52,9 @@ const ConnectedOptionsGame = connect(
  (dispatch) => (
     {
       onChangeOpt: (optvalue) => dispatch(ChangeOpt(optvalue)),
-      onChangeInputW: (w) => dispatch(ChangeInput('width', w)),
-      onChangeInputH: (h) => dispatch(ChangeInput('height', h))
+      onChangeSize: (sizevalue) => dispatch(ChangeSize(sizevalue))
+      /*onChangeInputW: (w) => dispatch(ChangeInput('width', w)),
+      onChangeInputH: (h) => dispatch(ChangeInput('height', h))*/
     }
   )
 )(OptionsGame);

@@ -11,38 +11,21 @@ export class Field extends Component {
     const ch = fld.length;
     const cw = fld[0].length;
     const lines = [];
-    //const wCol = 104;
-
+    let h = 0;
+    let y = 0;
+    let x = 0;
     for (let i = 0; i < ch; i++)
       {
         const line = [];
         for (let j = 0; j < cw; j++)
         {
           const classCell = onGetCellClass(fld[i][j], fld[0].length);
-          let h = fld[i][j]/cw; 
+          h = (fld[i][j]-1)/cw; 
           h = (h - h%1);       
-          let y = -h*widthCell;          
-          let x = -(fld[i][j] - h*ch)*widthCell;
-          var CellStyle = {backgroundPosition: classCell === 'CellP' && !(!fld[i][j] || stage === READY) && !(stage === PAUSED) ? 
-          x + `px ` + y + `px` : `0px 0px`
-          /*fld[i][j] === 1 ? `0px 0px` :
-          fld[i][j] === 2 ? `-104px 0px` : 
-          fld[i][j] === 3 ? `-208px 0px` : 
-          fld[i][j] === 4 ? `-312px 0px` : 
-          fld[i][j] === 5 ? `0px -104px` :
-          fld[i][j] === 6 ? `-104px -104px` : 
-          fld[i][j] === 7 ? `-208px -104px` : 
-          fld[i][j] === 8 ? `-312px -104px` : 
-          fld[i][j] === 9 ? `0px -208px` :
-          fld[i][j] === 10 ? `-104px -208px` : 
-          fld[i][j] === 11 ? `-208px -208px` : 
-          fld[i][j] === 12 ? `-312px -208px` : 
-          fld[i][j] === 13 ? `0px -312px` :
-          fld[i][j] === 14 ? `-104px -312px` : 
-          fld[i][j] === 15 ? `-208px -312px` : 
-          fld[i][j] === 16 ? `-312px -312px` : `0px 0px`
-            : `0px 0px`*//*,
-        backgroundImage: "url(" + {fileImgName}  + ")"*/};
+          y = -h*widthCell;          
+          x = widthCell-(fld[i][j] - h*ch)*widthCell;
+          var CellStyle = {backgroundPosition: classCell.substr(0,5) === 'CellP' && !(!fld[i][j] || stage === READY) && !(stage === PAUSED) ? 
+          x + `px ` + y + `px` : `0px 0px`};
           line.push(
             <div className={classNames('Cell ' + classCell, {Empty: !fld[i][j] || stage === READY, Paused: stage === PAUSED})} key={j} onClick={ () => onCellClick(j, i) }
               style={CellStyle}>             
