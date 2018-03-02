@@ -6,7 +6,7 @@ import { store } from './store';
 import { GameButton } from './NewGameButton'
 import { OptionsGame } from './OptionsGame'
 import { TimerGame } from './TimerGame'
-import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeInput, ChangeSize } from './actions'
+import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeSize } from './actions'
 import { READY, INPROGRESS, PAUSED, COMPLETED } from './const.js'
 
 const ConnectedField = connect(
@@ -19,12 +19,6 @@ const ConnectedField = connect(
         (v, w) => {
           const x = v/w; 
           return 'Cell' + (x - x%1 + (x%1 === 0 ? 0 : 1));           
-         // return 'Cell' + (v % w );           
-
-        /*  if (v >= 1 && v <= 4) return 'Cell1'
-          else if (v >= 5 && v <= 8) return 'Cell2'
-          else if (v >= 9 && v <= 12) return 'Cell3'
-          else return 'Cell4';*/
         } :
         (v, w) => {
              return 'CellP' + w;
@@ -53,8 +47,6 @@ const ConnectedOptionsGame = connect(
     {
       onChangeOpt: (optvalue) => dispatch(ChangeOpt(optvalue)),
       onChangeSize: (sizevalue) => dispatch(ChangeSize(sizevalue))
-      /*onChangeInputW: (w) => dispatch(ChangeInput('width', w)),
-      onChangeInputH: (h) => dispatch(ChangeInput('height', h))*/
     }
   )
 )(OptionsGame);

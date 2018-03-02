@@ -22,13 +22,6 @@ export function ChangeOpt (optvalue) {
   }
 }
 
-export function ChangeInput (what, value) {
-  return {
-    type: what === 'width' ? 'CHANGE_OPTIONS_W' : 'CHANGE_OPTIONS_H',
-    value
-  }
-}
-
 export function ChangeSize (sizevalue) {
   return {
     type: 'CHANGE_OPTIONS_SIZE',

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import {InputComponent} from './InputComponent'
 import {SelectComponent} from './SelectComponent'
 
 export class OptionsGame extends Component {
     render () {
-      const { selectedOption, visible, onChangeOpt, paramWidth, paramHeight, onChangeInputW, onChangeInputH, paramSize, onChangeSize} = this.props;
+      const { selectedOption, visible, onChangeOpt, paramSize, onChangeSize} = this.props;
 
       return(
         <div className={visible ? "panelOptions" : "display_none"}>
@@ -37,8 +36,3 @@ export class OptionsGame extends Component {
       );
     }
 }
-
-/*          <div className="optionWH">
-            <InputComponent AttrName="Ширина:" paramValue={paramWidth} onChangeInput={onChangeInputW}/>
-            <InputComponent AttrName="Высота:" paramValue={paramHeight} onChangeInput={onChangeInputH}/>
-          </div>*/

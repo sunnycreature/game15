@@ -15,7 +15,7 @@ export class TimerGame extends Component {
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var minutes_str = "0" + minutes;
     minutes_str = minutes_str.substr(minutes_str.length-2, 2);      
-    //var seconds = sec_num - (hours * 3600) - (minutes * 60);    
+    
     return (
       <div className = {classNames('TimerGame', {NoneDisplay: !visible})}>
         <div>Таймер:   {hours_str}:{minutes_str}:{sec_num_str}</div>

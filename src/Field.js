@@ -6,7 +6,7 @@ import { READY, PAUSED } from './const';
 export class Field extends Component {
 
   render() {
-    const { fld, onCellClick, stage, onGetCellClass, fileImgName, widthCell} = this.props;
+    const { fld, onCellClick, stage, onGetCellClass, widthCell} = this.props;
     
     const ch = fld.length;
     const cw = fld[0].length;
@@ -49,29 +49,3 @@ export class Field extends Component {
     )
   }
 } 
-
-/*fld[i][j] && stateCell === 1 ? "Cell" : fld[i][j] && stateCell === 2 ? "Cell Paused" : "Cell Empty"} key={j} onClick={ () => onCellClick(j, i) } */
-/*              <span style={{backgroundPosition: classCell === 'CellP' && fld[i][j] === 1 ? `0px` : 
-                classCell === 'CellP' && fld[i][j] === 2 ? `106px` : '0px'}}>
-                {classCell || classCell === 'CellP' ? ''  : fld[i][j]}
-              </span> */ /*style={{backgroundPosition: classCell === 'CellP' ? 
-                switch(fld[i][j]) {
-                  case 1:
-                    return `0px 0px`;
-                    break;
-                  case 2:
-                    return  `106px 0px` ;
-                    break;
-                  case 3:
-                    alert( 'Перебор' );
-                    break;
-                  default:
-                    alert( 'Я таких значений не знаю' );
-                }
-
-
-                fld[i][j] === 1 ? `0px 0px` : 
-                fld[i][j] === 2 ? `106px 0px` : 
-                fld[i][j] === 3 ? `212px 0px` :
-                fld[i][j] === 4 ? `318px 0px` 
-                : '0px'}}>*/

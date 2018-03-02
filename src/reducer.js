@@ -36,7 +36,6 @@ const getInitialState = (w, h, selectedOption = 'numbers') => {
       moves: 0,
       stage: READY,
       selectedOption,
-      fileImgName: '../img/img2.png',
       widthCell: 104
     }
   );
@@ -77,20 +76,32 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
       newField[y][x] = null;
     };
 
-    let k = 1;
     let endGame = !newField[h-1][w-1];
 
     if (selectedOption === 'figures') {
-
       endGame = 
         newField.reduce( 
-          (tr, r) => tr && (r[0] % w) === 1 &&
-            r.reduce( 
-              (tc, c, cidx) => 
-                tc && (!cidx || r[cidx - 1] === (c ? c : w * h) - 1), true), 
-                endGame);
-
+          (tr, r, ridx) => {
+            const sorted = [...r].sort( 
+              (a, b) => (a ? a : w * h) - (b ? b : w * h) 
+            );
+            return tr 
+              && (sorted[0] % w) === 1 
+              && sorted.reduce( 
+                (tc, c, cidx) => 
+                  tc && (
+                    !cidx 
+                    ||
+                    (cidx === w - 1 && ridx === h - 1)
+                    || 
+                    sorted[cidx - 1] === (c ? c : w * h) - 1
+                  ), 
+                true)
+          }, 
+          endGame
+        );
     } else {
+      let k = 1;
       for (let i = 0; i < h && endGame; i++) {
         for (let j = 0; j < w && endGame; j++) {
           if (k < h * w) {
@@ -100,9 +111,7 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
         }
       }  
     }
-
    
-    //
     return {...state, field: newField, stage: endGame ? COMPLETED : stage, moves: newMoves}
   } else if (action.type === 'START_GAME') {
     const { timerID } = action;
@@ -111,7 +120,6 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
       return {...state, timerID, elapsed: 1, stage: INPROGRESS, moves: 0}
     } else {
       const newState = getInitialState(w, h, state.selectedOption);
-      //const { optvalue } = action;
       return {...newState, timerID, elapsed: 1, stage: INPROGRESS }
     }
   } else if (action.type === 'GAME_PAUSE') {
@@ -128,26 +136,9 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     return {...state, selectedOption: optvalue}
   } else if (action.type === 'CHANGE_OPTIONS_SIZE' && (stage === READY || stage === COMPLETED)) {
     const { sizevalue } = action;
-    const s = sizevalue.substr(sizevalue.length-1,1) //(sizevalue === 'size4' ? 4 : (sizevalue === 'size5' ? 5 ) )
+    const s = sizevalue.substr(sizevalue.length-1,1) 
     return {...state, field: prepareField(s, s)}    
-  } else if (action.type === 'CHANGE_OPTIONS_W' && (stage === READY || stage === COMPLETED)) {
-    const { value } = action;
-    const { field } = state;
-    return {...state, field: prepareField(value, field.length)}
-  } else if (action.type === 'CHANGE_OPTIONS_H' && (stage === READY || stage === COMPLETED)) {
-    const { value } = action;
-    const { field } = state;
-    return {...state, field: prepareField(field[0].length, value)}
   } else {
     return state;
   }
 };
-
-/*    return {
-      ...state,
-      timerID: 0
-    }
-
-//: [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,null,15]],
-
-    */
