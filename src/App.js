@@ -6,6 +6,7 @@ import { store } from './store';
 import { GameButton } from './NewGameButton'
 import { OptionsGame } from './OptionsGame'
 import { TimerGame } from './TimerGame'
+import { PuzzleInfo } from './PuzzleInfo';
 import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeSize } from './actions'
 import { READY, INPROGRESS, PAUSED, COMPLETED } from './const.js'
 
@@ -112,6 +113,15 @@ const ConnectedTimer = connect(
   )
 )(TimerGame);
 
+const ConnectedPuzzleInfo = connect(
+  (state) => (
+    {
+      visible: state.gameReducer.stage !== READY && state.gameReducer.selectedOption === 'puzzle',
+      paramSize: state.gameReducer.field[0].length,
+    }
+  )
+)(PuzzleInfo);
+
 
 class App extends Component {
   render() {
@@ -135,6 +145,9 @@ class App extends Component {
               <div className="panelTimer">
                 <ConnectedTimer />
               </div>
+              <div className="optionPuzzleInfo">    
+                <ConnectedPuzzleInfo />    
+              </div>                 
             </div>
           </div>
 

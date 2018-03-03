@@ -31,7 +31,7 @@ export class OptionsGame extends Component {
           </div>
           <div className="optionSize">
             <SelectComponent paramSize={paramSize} onChangeSize={onChangeSize}/>
-          </div>          
+          </div>  
         </div>
       );
     }

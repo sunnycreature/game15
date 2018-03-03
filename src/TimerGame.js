@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import classNames from 'classnames';
 
-
 export class TimerGame extends Component {
   render() {
-    const { elapsed, visible, moves } = this.props;
+    const { elapsed, visible, moves} = this.props;
     var sec_num = Math.floor(elapsed / 1000);
     var sec_num_str = "0" + sec_num;
     sec_num_str = sec_num_str.substr(sec_num_str.length-2, 2); 
@@ -20,7 +19,7 @@ export class TimerGame extends Component {
       <div className = {classNames('TimerGame', {NoneDisplay: !visible})}>
         <div>Таймер:   {hours_str}:{minutes_str}:{sec_num_str}</div>
         <div>Сделано шагов: {moves}</div>        
-      </div>  
+      </div>      
     )
   }  
 }

@@ -109,7 +109,6 @@
   float: left;
   margin-left: 20px;
   margin-top: 20px;
-
 }
 .ConnectedField {
   position: relative;
@@ -260,3 +259,33 @@
   margin-left: 12px;
   padding-left: 4px;
 }
+.optionPuzzleInfo {
+  position: absolute;
+  top: 290px;
+}
+.PuzzleInfo {
+  float: left;
+  width: 96px;
+}
+.PuzzleInfo.NoneDisplay {
+  display: none;
+}
+.PuzzleImg4 {
+  float: left;
+  width: 96px;
+  height: 96px; 
+  background-image: url("./img/img400x400small.png");
+}
+.PuzzleImg5 {
+  float: left;
+  width: 96px;
+  height: 96px; 
+  background-image: url("./img/img500x500small.png");
+}
+.PuzzleImg6 {
+  float: left;
+  width: 96px;
+  height: 96px; 
+  background-image: url("./img/img600x600small.png");
+}
+
