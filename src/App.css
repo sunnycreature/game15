@@ -262,13 +262,17 @@
 .optionPuzzleInfo {
   position: absolute;
   top: 290px;
+ 
 }
 .PuzzleInfo {
   float: left;
   width: 96px;
+  border: 2px solid rgb(23, 78, 80);
+  border-radius: 4px;  
 }
 .PuzzleInfo.NoneDisplay {
   display: none;
+  border: none;
 }
 .PuzzleImg4 {
   float: left;
