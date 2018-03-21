@@ -7,8 +7,10 @@ import { GameButton } from './NewGameButton'
 import { OptionsGame } from './OptionsGame'
 import { TimerGame } from './TimerGame'
 import { PuzzleInfo } from './PuzzleInfo';
-import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeSize } from './actions'
-import { READY, INPROGRESS, PAUSED, COMPLETED } from './const.js'
+import { CellClick, StartGame, StopGame, PauseGame, ResumeGame, ChangeOpt, ChangeSize, SetTopName, CloseInputNameDlg } from './actions'
+import { READY, INPROGRESS, PAUSED, COMPLETED, INPUT_TOP_NAME } from './const.js'
+import { TopNameComponent } from './TopNameComponent';
+import { GetNameComponent } from './GetNameComponent.js';
 
 const ConnectedField = connect(
   (state) => (
@@ -122,12 +124,42 @@ const ConnectedPuzzleInfo = connect(
   )
 )(PuzzleInfo);
 
+const ConnectedTopName = connect(
+  (state) => (
+    {
+      top10: state.gameReducer.top10.reduce(
+        (p, t) => {
+          if (t.w === state.gameReducer.field.length && t.selectedOption === state.gameReducer.selectedOption) {
+            p.push(t);
+          }
+          return p;
+        },
+        []
+      )
+    }
+  )
+)(TopNameComponent);
+
+const ConnectedGetName = connect(
+  (state) => (
+    {
+      visible: state.gameReducer.stage === INPUT_TOP_NAME
+    }
+  ),
+ (dispatch) => (
+    {
+      onSetTopName: (namevalue) => dispatch(SetTopName(namevalue)),
+      onCloseInputNameDlg: () => dispatch(CloseInputNameDlg())
+    }
+  )
+)(GetNameComponent);
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <div className="App">
+          <ConnectedGetName/>
           <header className="App-header">
             <h1 className="App-title">Game15</h1>
           </header>
@@ -147,8 +179,11 @@ class App extends Component {
               </div>
               <div className="optionPuzzleInfo">    
                 <ConnectedPuzzleInfo />    
-              </div>                 
+              </div>  
             </div>
+            <div className="panelTopName">    
+              <ConnectedTopName />    
+            </div>                             
           </div>
 
         </div>

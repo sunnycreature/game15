@@ -55,3 +55,16 @@ export function ResumeGame(dispatch) {
     type: 'GAME_RESUME'
   }
 }
+
+export function SetTopName (namevalue) {
+  return {
+    type: 'SET_TOPNAME',
+    namevalue
+  }
+}
+
+export function CloseInputNameDlg () {
+  return {
+    type: 'CLOSE_TOPNAME'
+  }
+}
