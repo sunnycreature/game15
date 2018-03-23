@@ -32,7 +32,7 @@ const getInitialState = (w, h,
   top10 = [
     {
       selectedOption: 'numbers',
-      w: 6,
+      w: 5,
       player: 'noname',
       elapsed: 500,
       moves: 10
