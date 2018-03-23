@@ -1,5 +1,6 @@
 import { READY, INPROGRESS, PAUSED, COMPLETED, INPUT_TOP_NAME } from './const.js'
 
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -37,7 +38,6 @@ const getInitialState = (w, h,
       moves: 10
     }  
   ], 
-    top10 = JSON.parse(data.top10),
   selectedOption = 'numbers') => 
 {
   return(
