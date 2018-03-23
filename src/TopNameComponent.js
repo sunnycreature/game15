@@ -15,22 +15,34 @@ function GetTimeStr (elapsed) {
 }
 export class TopNameComponent extends Component {
   render() {
-    const { top10 } = this.props; 
-    top10.sort( (a, b) => a.elapsed - b.elapsed );
+    const { top10, w, selectedOption } = this.props; 
+    const list = top10.reduce(
+      (p, t) => {
+        if (t.w === w && t.selectedOption === selectedOption) {
+          p.push(t);
+        }
+        return p;
+      },
+      []
+    ).sort( (a, b) => a.elapsed - b.elapsed );
     return(
       <div className="topName">
         <div> Топ 10 </div>
         <table>
-          <tr>
-            <th>Имя игрока</th>
-            <th>Время</th>
-            <th>Шаги</th>
-          </tr>  
+          <thead>
+            <tr>
+              <th>Имя игрока</th>
+              <th>Время</th>
+              <th>Шаги</th>
+            </tr>  
+          </thead>
+          <tbody>
           {
-            top10.map(
-              t => <tr><td>{t.player}</td><td>{GetTimeStr(t.elapsed)}</td><td>{t.moves}</td></tr>
+            list.map(
+              (t, idx) => <tr key={idx}><td>{t.player}</td><td>{GetTimeStr(t.elapsed)}</td><td>{t.moves}</td></tr>
             )
           }
+          </tbody>
         </table>
       </div>
     )

@@ -127,15 +127,9 @@ const ConnectedPuzzleInfo = connect(
 const ConnectedTopName = connect(
   (state) => (
     {
-      top10: state.gameReducer.top10.reduce(
-        (p, t) => {
-          if (t.w === state.gameReducer.field.length && t.selectedOption === state.gameReducer.selectedOption) {
-            p.push(t);
-          }
-          return p;
-        },
-        []
-      )
+      w: state.gameReducer.field.length,
+      selectedOption: state.gameReducer.selectedOption,
+      top10: state.gameReducer.top10
     }
   )
 )(TopNameComponent);

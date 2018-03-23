@@ -68,3 +68,10 @@ export function CloseInputNameDlg () {
     type: 'CLOSE_TOPNAME'
   }
 }
+
+export function LoadTop10 (top10) {
+  return {
+    type: 'LOAD_TOP10',
+    top10
+  }
+}

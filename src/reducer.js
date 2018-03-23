@@ -169,6 +169,7 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     const s = sizevalue.substr(sizevalue.length-1,1) 
     return {...state, field: prepareField(s, s)}  
   } else if (action.type === 'SET_TOPNAME') {
+    console.log(top10);
     const { namevalue } = action;    
 
     const arr = top10.reduce(
@@ -206,6 +207,9 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     return {...state, stage: COMPLETED, top10: [...arrOther, ...arr.slice(0, 10)]}      
   } else if (action.type === 'CLOSE_TOPNAME') {
     return {...state, stage: COMPLETED}      
+  } else if (action.type === 'LOAD_TOP10') {
+    const { top10 } = action;
+    return {...state, top10 }      
   } else {
     return state;
   }

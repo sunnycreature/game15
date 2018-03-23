@@ -3,8 +3,8 @@
   "top10": [
     {
       "selectedOption": "numbers",
-      "w": 6,
-      "player": "noname",
+      "w": 4,
+      "player": "from server",
       "elapsed": 500,
       "moves": 10
     } 
