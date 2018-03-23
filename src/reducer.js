@@ -37,6 +37,7 @@ const getInitialState = (w, h,
       moves: 10
     }  
   ], 
+    top10 = JSON.parse(data.top10),
   selectedOption = 'numbers') => 
 {
   return(

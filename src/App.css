@@ -310,16 +310,13 @@
   font-size: 14px;
   padding-left: 4px;
 }
-.topName ul {
-  margin: 0; /* Обнуляем значение отступов */
-  padding-left: 0px;
-  padding-top: 10px;
+
+ .topName th {
+   font-weight: normal;
  }
- .topName ul li {
-  display: inline; /* Отображать как строчный элемент */
-  padding: 5px; /* Поля вокруг текста */
-  text-align: center;  
- }
+ .topName td {
+  font-size: 12px;
+}
 .NickName {
   width: 30px;
 }
@@ -329,6 +326,7 @@
   z-index: 1; /* Sit on top */
   left: 50%;
   top: 50%;
+  margin-left: -125px;
   width: 250px;
   background-color:rgb(204, 204, 191);
   border: 4px solid #fff;
@@ -376,4 +374,9 @@
   border-radius:5px;  
   cursor:pointer;
   margin-top: 4px;  
+}
+.LineTopName {
+  width: 100px;
+  height: 1px;
+  float: left;
 }

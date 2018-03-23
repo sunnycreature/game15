@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+
 function GetTimeStr (elapsed) {
   var sec_num = Math.floor(elapsed / 1000);
   var sec_num_str = "0" + sec_num;
@@ -27,7 +28,7 @@ export class TopNameComponent extends Component {
           </tr>  
           {
             top10.map(
-              t => <tr><td>{t.player}</td><td>{t.elapsed}</td><td>{t.moves}</td></tr>
+              t => <tr><td>{t.player}</td><td>{GetTimeStr(t.elapsed)}</td><td>{t.moves}</td></tr>
             )
           }
         </table>

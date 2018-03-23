@@ -1,0 +1,12 @@
+{
+  "version": ["1.0"],
+  "top10": [
+    {
+      "selectedOption": "numbers",
+      "w": 6,
+      "player": "noname",
+      "elapsed": 500,
+      "moves": 10
+    } 
+  ] 
+}
