@@ -56,10 +56,63 @@ export function ResumeGame(dispatch) {
   }
 }
 
-export function SetTopName (namevalue) {
+export function SetTopName (dispatch, namevalue, moves, elapsed, w, selectedOption) {
+
+  fetch('http://localhost:3003/db')
+  .then(res => res.text())
+  .then(res => JSON.parse(res))
+  .then(obj => {
+    const top10 = obj.top10;
+
+    const arr = top10.reduce(
+      (p, t) => {
+        if (t.w === w && t.selectedOption === selectedOption) {
+          p.push({...t});
+        }
+        return p;
+      },
+      []
+    );
+
+    arr.push(        
+      {
+        selectedOption,
+        w,
+        player: namevalue,
+        elapsed,
+        moves
+      }  
+    );    
+
+    arr.sort( (a, b) => a.elapsed - b.elapsed );
+
+    const arrOther = top10.reduce(
+      (p, t) => {
+        if (t.w !== w || t.selectedOption !== selectedOption) {
+          p.push({...t});
+        }
+        return p;
+      },
+      []
+    );
+
+    const newTop10 = [...arrOther, ...arr.slice(0, 10)];
+
+    fetch('http://localhost:3003/db/top10', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({top10: newTop10})
+    })
+    .then(
+      () => dispatch(LoadTop10(newTop10))
+    )
+    .catch( err => console.log(err) );      
+  });
+
   return {
-    type: 'SET_TOPNAME',
-    namevalue
+    type: 'SET_TOPNAME'
   }
 }
 

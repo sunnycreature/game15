@@ -7,6 +7,13 @@
       "player": "from server",
       "elapsed": 500,
       "moves": 10
+    }, 
+    {
+      "selectedOption": "numbers",
+      "w": 5,
+      "player": "from server 2222",
+      "elapsed": 500,
+      "moves": 10
     } 
   ] 
 }

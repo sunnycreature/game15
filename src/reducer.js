@@ -168,43 +168,8 @@ export const gameReducer = (state = getInitialState(4, 4), action) => {
     const { sizevalue } = action;
     const s = sizevalue.substr(sizevalue.length-1,1) 
     return {...state, field: prepareField(s, s)}  
-  } else if (action.type === 'SET_TOPNAME') {
-    console.log(top10);
-    const { namevalue } = action;    
-
-    const arr = top10.reduce(
-      (p, t) => {
-        if (t.w === w && t.selectedOption === selectedOption) {
-          p.push({...t});
-        }
-        return p;
-      },
-      []
-    )
-
-    arr.push(        
-      {
-        selectedOption,
-        w,
-        player: namevalue,
-        elapsed,
-        moves
-      }  
-    );
-
-    arr.sort( (a, b) => a.elapsed - b.elapsed );
-
-    const arrOther = top10.reduce(
-      (p, t) => {
-        if (t.w !== w || t.selectedOption !== selectedOption) {
-          p.push({...t});
-        }
-        return p;
-      },
-      []
-    )
-    
-    return {...state, stage: COMPLETED, top10: [...arrOther, ...arr.slice(0, 10)]}      
+  } else if (action.type === 'SET_TOPNAME') {    
+    return {...state, stage: COMPLETED}      
   } else if (action.type === 'CLOSE_TOPNAME') {
     return {...state, stage: COMPLETED}      
   } else if (action.type === 'LOAD_TOP10') {

@@ -137,12 +137,17 @@ const ConnectedTopName = connect(
 const ConnectedGetName = connect(
   (state) => (
     {
-      visible: state.gameReducer.stage === INPUT_TOP_NAME
+      visible: state.gameReducer.stage === INPUT_TOP_NAME,
+      moves: state.gameReducer.moves,
+      elapsed: state.gameReducer.elapsed,
+      w: state.gameReducer.field.length,
+      selectedOption: state.gameReducer.selectedOption
     }
   ),
  (dispatch) => (
     {
-      onSetTopName: (namevalue) => dispatch(SetTopName(namevalue)),
+      onSetTopName: (namevalue, moves, elapsed, w, selectedOption) => 
+        dispatch(SetTopName(dispatch, namevalue, moves, elapsed, w, selectedOption)),
       onCloseInputNameDlg: () => dispatch(CloseInputNameDlg())
     }
   )

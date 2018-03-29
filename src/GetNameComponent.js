@@ -3,7 +3,8 @@ import './App.css';
 
 export class GetNameComponent extends Component {
   render() {
-    const { onSetTopName, onCloseInputNameDlg, visible} = this.props; 
+    const { onSetTopName, onCloseInputNameDlg, visible, 
+      moves, elapsed, w, selectedOption} = this.props; 
 
     if (!visible) return null;
 
@@ -22,7 +23,7 @@ export class GetNameComponent extends Component {
             onClick={ 
               () => {
                 if (this.textInput) {
-                  onSetTopName(this.textInput.value);
+                  onSetTopName(this.textInput.value, moves, elapsed, w, selectedOption);
                 }   
               }  
             }
