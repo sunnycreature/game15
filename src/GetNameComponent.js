@@ -15,6 +15,7 @@ export class GetNameComponent extends Component {
           <input
             type="text"
             ref={(input) => { this.textInput = input; }} 
+            autoFocus
           />
         </div>
         <div className="modal-footer">

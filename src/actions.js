@@ -31,6 +31,12 @@ export function ChangeSize (sizevalue) {
 }
 
 export function StartGame(dispatch, timerID) {
+  fetch(HOST_ADDR)
+    .then(res => { return res.text(); })
+    .then(res => JSON.parse(res) )
+    .then(obj => {
+        dispatch(LoadTop10(obj.top10));
+    });  
   if (timerID) clearInterval(timerID);
   return {
     type: 'START_GAME',
@@ -87,7 +93,7 @@ export function SetTopName (dispatch, namevalue, moves, elapsed, w, selectedOpti
 
     arr.sort( (a, b) => a.elapsed - b.elapsed );
 
-    const arrOther = arr.reduce(
+    const arrOther = obj.reduce(
       (p, t) => {
         if (t.w !== w || t.selectedOption !== selectedOption) {
           p.push({...t});
@@ -96,7 +102,6 @@ export function SetTopName (dispatch, namevalue, moves, elapsed, w, selectedOpti
       },
       []
     );
-
     const newTop10 = [...arrOther, ...arr.slice(0, 10)];
 
     return fetch(HOST_ADDR, { 

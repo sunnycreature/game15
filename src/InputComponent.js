@@ -10,7 +10,7 @@ export class InputComponent extends Component {
         <span>
           {AttrName}
         </span>
-        <input type="text" defaultValue={paramValue} onChange={(e) => onChangeInput(e.target.value)}/>
+        <input type="text" defaultValue={paramValue} onChange={(e) => onChangeInput(e.target.value)} />
       </div>
     )
   }
