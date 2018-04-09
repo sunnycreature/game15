@@ -1,1 +1,26 @@
-{"version":"1.0","top10":[{"selectedOption":"numbers","w":5,"player":"from server","elapsed":500,"moves":10},{"selectedOption":"numbers","w":5,"player":"from server 2222","elapsed":500,"moves":10},{"selectedOption":"numbers","w":5,"player":"from client","elapsed":777,"moves":77}]}
+{
+  "version": "1.0",
+  "top10": [
+    {
+      "selectedOption": "figures",
+      "w": 5,
+      "player": "dfgfghrf",
+      "elapsed": 1001,
+      "moves": 1
+    },
+    {
+      "selectedOption": "figures",
+      "w": 5,
+      "player": "fig_A",
+      "elapsed": 8001,
+      "moves": 1
+    },
+    {
+      "selectedOption": "figures",
+      "w": 5,
+      "player": "fig_B",
+      "elapsed": 12001,
+      "moves": 1
+    }
+  ]
+}

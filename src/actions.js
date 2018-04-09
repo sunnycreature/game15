@@ -1,3 +1,4 @@
+import { HOST_ADDR } from './const';
 
 function TimeTick(dispatch) {
   dispatch(
@@ -58,13 +59,13 @@ export function ResumeGame(dispatch) {
 
 export function SetTopName (dispatch, namevalue, moves, elapsed, w, selectedOption) {
 
-  fetch('http://localhost:3003/db')
+  fetch(HOST_ADDR)
   .then(res => res.text())
   .then(res => JSON.parse(res))
-  .then(obj => {
-    const top10 = obj.top10;
+  .then(obj => obj.top10 )
+  .then( obj => {
 
-    const arr = top10.reduce(
+    const arr = obj.reduce(
       (p, t) => {
         if (t.w === w && t.selectedOption === selectedOption) {
           p.push({...t});
@@ -86,7 +87,7 @@ export function SetTopName (dispatch, namevalue, moves, elapsed, w, selectedOpti
 
     arr.sort( (a, b) => a.elapsed - b.elapsed );
 
-    const arrOther = top10.reduce(
+    const arrOther = arr.reduce(
       (p, t) => {
         if (t.w !== w || t.selectedOption !== selectedOption) {
           p.push({...t});
@@ -98,23 +99,25 @@ export function SetTopName (dispatch, namevalue, moves, elapsed, w, selectedOpti
 
     const newTop10 = [...arrOther, ...arr.slice(0, 10)];
 
-    fetch('http://localhost:3003/db/top10', {
-      method: 'put',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({top10: newTop10})
+    return fetch(HOST_ADDR, { 
+      method: 'POST',
+      body:    JSON.stringify({version: '1.0', top10: newTop10}),
+      headers: { 'Content-Type': 'application/json' },
     })
-    .then(
-      () => dispatch(LoadTop10(newTop10))
-    )
-    .catch( err => console.log(err) );      
-  });
+  })
+  .then( () => fetch(HOST_ADDR) )
+  .then(res => { return res.text(); })
+  .then(res => JSON.parse(res) )
+  .then(obj => dispatch(LoadTop10(obj.top10)))   
+  .catch( err => console.log(err) );      
 
   return {
     type: 'SET_TOPNAME'
   }
 }
+
+fetch(HOST_ADDR)
+
 
 export function CloseInputNameDlg () {
   return {
