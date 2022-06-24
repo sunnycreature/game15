@@ -5,7 +5,7 @@
   "homepage": "http://gsbelarus.com/gs/game15",
   "dependencies": {
     "classnames": "^2.2.5",
-    "node-fetch": "^2.1.1",
+    "node-fetch": "^2.6.7",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
